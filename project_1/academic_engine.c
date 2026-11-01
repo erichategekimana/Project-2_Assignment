@@ -4,7 +4,6 @@
 #include <stdbool.h>
 
 #define STUDENT_ID_HEADER "54321" /* Replace with your actual Student ID */
-#define INITIAL_DATASET_SIZE 12
 #define PASS_THRESHOLD 50.0f
 #define RISK_THRESHOLD 65.0f
 
@@ -49,37 +48,9 @@ void action_exit_program(StudentDatabase *db);
 float compute_average_pointer(const Student *start, size_t count);
 const Student* find_extremum_pointer(const Student *start, size_t count, bool find_max);
 
-/* --- Initial Dataset --- */
-static const Student INITIAL_STUDENTS[INITIAL_DATASET_SIZE] = {
-    {101, "Aline Umutoni",      "Data Structures",     88.5f},
-    {102, "David Mugisha",      "Operating Systems",   42.0f},
-    {103, "Grace Keza",         "Algorithms",          76.0f},
-    {104, "Jean-Luc Habimana",  "Computer Networks",   35.5f},
-    {105, "Sarah Ingabire",     "Database Systems",    91.0f},
-    {106, "Patrick Niyonzima",  "Software Engineering",58.0f},
-    {107, "Cynthia Uwase",      "Data Structures",     63.5f},
-    {108, "Emmanuel Kwizera",   "Algorithms",          49.0f},
-    {109, "Divine Gasana",      "Operating Systems",   82.0f},
-    {110, "Kevin Shema",        "Database Systems",    68.0f},
-    {111, "Diane Mutoni",       "Software Engineering",74.5f},
-    {112, "Samuel Rugamba",     "Computer Networks",   44.0f}
-};
-
 /* --- Main Program --- */
 int main(void) {
     StudentDatabase db = { .records = NULL, .count = 0, .capacity = 0 };
-
-    /* Allocate dynamic memory for the initial dataset */
-    db.capacity = INITIAL_DATASET_SIZE;
-    db.records = (Student *)malloc(db.capacity * sizeof(Student));
-    if (db.records == NULL) {
-        fprintf(stderr, "FATAL ERROR: Failed to allocate initial heap memory.\n");
-        return EXIT_FAILURE;
-    }
-
-    /* Populate initial records */
-    memcpy(db.records, INITIAL_STUDENTS, sizeof(INITIAL_STUDENTS));
-    db.count = INITIAL_DATASET_SIZE;
 
     /* Function Pointer Table for Menu Dispatch (1-indexed mapping) */
     MenuAction dispatch_table[] = {
@@ -129,8 +100,8 @@ int main(void) {
 void display_header(void) {
     printf("======================================================================\n");
     printf("Student ID: %s\n", STUDENT_ID_HEADER);
-    printf("Project: Dynamic Academic Performance and Risk Analysis Engine\n");
-    printf("Custom Analysis: Academic Risk Index (ARI)\n");
+    printf("Project: Academic performance and risk analysis engine\n");
+    printf("Custom Analysis: Academic risk index\n");
     printf("======================================================================\n");
 }
 
@@ -221,12 +192,14 @@ void action_add_student(StudentDatabase *db) {
     int new_id = get_valid_int("Enter Student ID: ");
 
     /* Check for duplicate ID using pointer traversal */
-    const Student *curr = db->records;
-    const Student *end = db->records + db->count;
-    for (; curr < end; ++curr) {
-        if (curr->id == new_id) {
-            printf("[Rejected] A student record with ID %d already exists.\n", new_id);
-            return;
+    if (db->count > 0 && db->records != NULL) {
+        const Student *curr = db->records;
+        const Student *end = db->records + db->count;
+        for (; curr < end; ++curr) {
+            if (curr->id == new_id) {
+                printf("[Rejected] A student record with ID %d already exists.\n", new_id);
+                return;
+            }
         }
     }
 
