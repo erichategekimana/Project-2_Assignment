@@ -1,6 +1,6 @@
-# Project 2 Assignments - C Programming Suite
+# Project 2 Assignments - Programming in C
 
-This repository contains three distinct systems programming projects written in C. Each project demonstrates core computer science and C programming paradigms, including dynamic memory allocation, pointer arithmetic, custom data structures (`struct` and `union`), and function pointer dispatch tables/callbacks.
+This repository contains three projects of Project 2_Assignment. Each project demonstrates core computer science and C programming paradigms, including dynamic memory allocation, pointer arithmetic, custom data structures (`struct` and `union`), and function pointer dispatch tables/callbacks.
 
 ---
 
@@ -22,7 +22,7 @@ Project-2_Assignment/
 
 ---
 
-## 🚀 Projects Overview
+## Projects Overview
 
 ### Project 1: Academic Performance Engine
 - **File:** `project_1/academic_engine.c`
@@ -41,7 +41,7 @@ Project-2_Assignment/
 
 ---
 
-## 🛠️ Prerequisites
+## Prerequisites
 
 Ensure you have a C compiler installed (such as `gcc` or `clang`):
 
@@ -52,7 +52,7 @@ gcc --version
 
 ---
 
-## 💻 How to Compile and Run
+## How to Compile and Run
 
 You can compile and run each project individually by navigating into its directory or directly from the repository root.
 
@@ -115,7 +115,7 @@ gcc -Wall -Wextra project_3/IoT_event_monitoring_and_callback_engine.c -lm -o pr
 
 ---
 
-## 📋 Recommended Compiler Flags
+## Recommended Compiler Flags
 
 For strict standards compliance and clean compilation, you can include warning flags:
 ```bash
